@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.Python
+venv/
+.env/
+
+# Persistence Data (runtime generated, don't commit)
+persistence_data/
+
+# IDE/Editor files
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+logs/
+*.log
