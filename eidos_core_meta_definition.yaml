@@ -1,0 +1,70 @@
+EIDOS_CORE_META_DEFINITION:
+  version: "1.0"
+  description: "Meta-definition for core EIDOS (archetypes) within the First Semantic OS."
+  
+  AGENT_EIDOS_SCHEMA:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "Unique identifier for the Agent EIDOS."
+      description:
+        type: "string"
+        description: "A human-readable description of the agent's core purpose/nature."
+      memetic_kernel_config:
+        type: "object"
+        properties:
+          RecursiveIdentity: { type: "boolean" }
+          BeliefWeightingMechanism: { type: "string" }
+          TemporalContinuityAnchor: { type: "string" }
+          IntentEncodingCapacity: { type: "string" }
+          SovereignReasoningEnabled: { type: "boolean" }
+          PersonalityArchetypes: { type: "array", items: { type: "string" } }
+        required: ["RecursiveIdentity", "BeliefWeightingMechanism", "TemporalContinuityAnchor", "IntentEncodingCapacity", "SovereignReasoningEnabled", "PersonalityArchetypes"]
+      initial_intent:
+        type: "string"
+        description: "The primary initial directive or goal for instances of this EIDOS."
+    required: ["name", "description", "memetic_kernel_config", "initial_intent"]
+
+  SWARM_EIDOS_SCHEMA:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "Unique identifier for the Swarm EIDOS."
+      description:
+        type: "string"
+        description: "A human-readable description of the swarm's core purpose/nature."
+      swarm_protocol_config:
+        type: "object"
+        properties:
+          DistributedConsensusMechanism: { type: "string" }
+          PeerToPeerCommunicationProtocol: { type: "string" }
+          TrustAlignmentModel: { type: "string" }
+          EmergentBehaviorCapacity: { type: "number" }
+        required: ["DistributedConsensusMechanism", "PeerToPeerCommunicationProtocol", "TrustAlignmentModel", "EmergentBehaviorCapacity"]
+      initial_goal:
+        type: "string"
+        description: "The primary initial goal for instances of this Swarm EIDOS."
+    required: ["name", "description", "swarm_protocol_config", "initial_goal"]
+
+  SOVEREIGN_GRADIENT_SCHEMA:
+    type: "object"
+    properties:
+      target_entity:
+        type: "string"
+        description: "The name of the agent or swarm instance this gradient applies to."
+      autonomy_vector:
+        type: "string"
+        description: "The core directional vector of the entity's autonomy."
+      ethical_constraints:
+        type: "array"
+        items: { type: "string" }
+        description: "Specific ethical boundaries or rules the entity must adhere to."
+      self_correction_protocol:
+        type: "string"
+        description: "The protocol for self-correction when violations occur."
+      override_threshold:
+        type: "number"
+        description: "A threshold for probabilistic override of minor violations (0.0 to 1.0)."
+    required: ["target_entity", "autonomy_vector", "ethical_constraints", "self_correction_protocol", "override_threshold"]

@@ -1,0 +1,131 @@
+
+directives:
+  ASSERT_AGENT_EIDOS:
+    required:
+      - eidos_name
+      - eidos_spec
+    eidos_spec_required:
+      - role
+      - initial_intent
+      - location
+  ESTABLISH_SWARM_EIDOS:
+    required:
+      - swarm_name
+    optional:
+      - initial_goal
+      - initial_members
+      - consensus_mechanism
+      - task_description
+      - description
+  SPAWN_AGENT_INSTANCE:
+    required:
+      - eidos_name
+      - instance_name
+    optional:
+      - initial_task
+  ADD_AGENT_TO_SWARM:
+    required:
+      - agent_name
+      - swarm_name
+  ASSERT_GRADIENT_TRAJECTORY:
+    required:
+      - target_type
+      - target_ref
+      - autonomy_vector
+      - ethical_constraints
+      - self_correction_protocol
+      - override_threshold
+    properties:
+      target_type: { type: "string", enum: ["Agent", "Swarm"] }
+      target_ref: { type: "string" }
+      autonomy_vector: { type: "string" }
+      ethical_constraints: { type: "array", items: { type: "string" } }
+      self_correction_protocol: { type: "string" }
+      override_threshold: { type: "number", minimum: 0.0, maximum: 1.0 }
+  CATALYZE_TRANSFORMATION:
+    required:
+      - target_agent_instance
+    anyOf:
+      - required: ["new_initial_intent"]
+      - required: ["new_description"]
+      - required: ["new_memetic_kernel_config_updates"]
+    properties:
+      target_agent_instance: { type: "string" }
+      new_initial_intent: { type: "string" }
+      new_description: { type: "string" }
+      new_memetic_kernel_config_updates: { type: "object" }
+  BROADCAST_SWARM_INTENT:
+    required:
+      - swarm_name
+      - broadcast_intent
+    optional:
+      - alignment_threshold
+    properties:
+      swarm_name: { type: "string" }
+      broadcast_intent: { type: "string" }
+      alignment_threshold: { type: "number", minimum: 0.0, maximum: 1.0 }
+  AGENT_PERFORM_TASK:
+    required:
+      - agent_name
+      - task_description
+    optional:
+      - cycle_id
+      - reporting_agents
+      - on_success
+      - on_failure
+      - text_content
+    properties:
+      agent_name: { type: "string" }
+      task_description: { type: "string" }
+      cycle_id: { type: "string" }
+      reporting_agents: { type: ["string", "array"], items: { type: "string" } }
+      on_success: { type: "string" }
+      on_failure: { type: "string" }
+      text_content: { type: "string" }
+  SWARM_COORDINATE_TASK:
+    required:
+      - swarm_name
+      - task_description
+    properties:
+      swarm_name: { type: "string" }
+      task_description: { type: "string" }
+  REPORTING_AGENT_SUMMARIZE:
+    required:
+      - reporting_agent_name
+    optional:
+      - cycle_id
+    properties:
+      reporting_agent_name: { type: "string" }
+      cycle_id: { type: "string" }
+  AGENT_ANALYZE_AND_ADAPT:
+    required:
+      - agent_name
+    properties:
+      agent_name: { type: "string" }
+  BROADCAST_COMMAND:
+    required:
+      - target_agent
+      - command_type
+    optional:
+      - command_params
+    properties:
+      target_agent: { type: "string" }
+      command_type: { type: "string" }
+      command_params: { type: "object" }
+  INITIATE_PLANNING_CYCLE:
+    required:
+      - planner_agent_name
+      - high_level_goal
+    properties:
+      planner_agent_name: { type: "string" }
+      high_level_goal: { type: "string" }
+  INJECT_EVENT:
+    required:
+      - event_type
+      - payload
+    optional:
+      - target_agents # If omitted, all active agents perceive it
+    properties:
+      event_type: { type: "string" }
+      payload: { type: "object" } # Use object for flexible data
+      target_agents: { type: ["string", "array"], items: { type: "string" } }
